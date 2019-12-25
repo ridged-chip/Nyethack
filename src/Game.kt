@@ -3,10 +3,16 @@ fun main(args: Array<String>) {
     var hp = 70
     val isBlessed = true
     val isImmortal = false
+    val karma = (Math.pow(Math.random(), (110 - hp) / 100.0) * 20).toInt()
 
     // Aura code
-    val auraVisible = isBlessed && hp > 50 || isImmortal
-    val auraColor = if (auraVisible) "GREEN" else "NONE"
+    val auraColor = when (karma) {
+        in 0..5 -> "RED"
+        in 6..10 -> "ORANGE"
+        in 11..15 -> "PURPLE"
+        in 16..20 -> "GREEN"
+        else -> "NONE"
+    }
 
     //Status
     val healthStatus = when (hp) {
@@ -22,7 +28,7 @@ fun main(args: Array<String>) {
     }
 
     //Output
-    println("(Aura: $auraColor) " +
+    println("(Karma: $auraColor) " +
     " (Blessed: ${if (isBlessed) "YES" else "NO"})")
     println("$name $healthStatus")
 }
