@@ -4,7 +4,7 @@ fun main(args: Array<String>) {
     val isBlessed = true
     val isImmortal = false
 
-    // Aura code
+    // Aura
     val auraColor = auraColor(isBlessed, hp, isImmortal)
 
     //Status
@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     castFireball(5)
 }
 
+// I can omit the braces, return type and return statement on functions that only evaluate a single expression.
 private fun formatHealthStatus(hp: Int, isBlessed: Boolean) =
     when (hp) {
         100 -> "is in excellent condition!"
