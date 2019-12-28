@@ -49,6 +49,4 @@ private fun printPlayerStatus(
     println("$name $healthStatus")
 }
 
-private fun castFireball(numFireballs: Int = 2) {
-    println("A glass of Fireball springs into existence. (x$numFireballs)")
-}
+private fun castFireball(numFireballs: Int = 2) = numFireballs*2.5
