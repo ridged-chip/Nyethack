@@ -1,3 +1,5 @@
+import kotlin.math.roundToInt
+
 fun main(args: Array<String>) {
     val name = "Matt"
     var hp = 70
@@ -13,7 +15,7 @@ fun main(args: Array<String>) {
     //Output
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
 
-    castFireball(5)
+    printDrunkStatus(name, formatDrunkStatus(castFireball(10.0)))
 }
 
 // I can omit the braces, return type and return statement on functions that only evaluate a single expression.
@@ -49,4 +51,15 @@ private fun printPlayerStatus(
     println("$name $healthStatus")
 }
 
-private fun castFireball(numFireballs: Int = 2) = numFireballs*2.5
+private fun castFireball(numFireballs: Double = 2.0): Int = (numFireballs*2.5).roundToInt()
+
+private fun formatDrunkStatus(intoxicationLevel: Int = 1) =
+        when (intoxicationLevel) {
+            in 1..10 -> "Tipsy"
+            in 11..20 -> "Sloshed"
+            in 21..30 -> "Soused"
+            in 31..40 -> "Stewed"
+            else -> "Wasted"
+        }
+
+private fun printDrunkStatus(name: String, intoxicationStatus: String) = println("$name is $intoxicationStatus")
