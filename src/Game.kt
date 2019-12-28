@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     castFireball(5)
 }
 
+// I can omit the braces, return type and return statement on functions that only evaluate a single expression.
 private fun formatHealthStatus(hp: Int, isBlessed: Boolean) =
     when (hp) {
         100 -> "is in excellent condition!"
@@ -29,11 +30,9 @@ private fun formatHealthStatus(hp: Int, isBlessed: Boolean) =
         else -> "has ruptured organs and is bordering on shock. I hope you wrote your will..."
 }
 
-private fun auraColor(isBlessed: Boolean, hp: Int, isImmortal: Boolean): String {
-    val auraVisible = isBlessed && hp > 50 || isImmortal
-    val auraColor = if (auraVisible) "GREEN" else "NONE"
-    return auraColor
-}
+private fun auraColor(isBlessed: Boolean, hp: Int, isImmortal: Boolean) =
+    if (isBlessed && hp > 50 || isImmortal) "GREEN"
+    else "NONE"
 
 private fun printPlayerStatus(
     auraColor: String,
