@@ -4,6 +4,7 @@ const val TAVERN_NAME = "Taernyl's Folly"
 
 var playerGold = 10
 var playerSilver = 10
+var dragonCoin = 5.0
 
 fun main(args: Array<String>) {
     placeOrder("shandy,Dragon's Breath,5.91")
@@ -11,22 +12,13 @@ fun main(args: Array<String>) {
 
 fun performPurchase(price: Double) {
     displayBalance()
-    val totalPurse = playerGold + (playerSilver / 100.0)
-    println("Total purse: $totalPurse")
-    println("Purchasing item for $price")
-
-    val remainingBalance = totalPurse - price
-    println("Remaining balance: ${"%.2f".format(remainingBalance)}")
-
-    val remainingGold = remainingBalance.toInt()
-    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
+    println("Purchasing item for $price gp")
+    dragonCoin -= (price / 1.43)
     displayBalance()
 }
 
 private fun displayBalance(){
-    println("Player's purse balance: Gold: $playerGold , Silver: $playerSilver")
+    println("Current balance: $dragonCoin")
 }
 
 private fun toDragonSpeak(phrase: String) =
@@ -41,16 +33,6 @@ private fun toDragonSpeak(phrase: String) =
         }
     }
 
-private fun diplsayRemainingPints() {
-    val caskGallons = 5
-    val pintsInGallon = 0.125
-    var pintsDrank = 12
-    pintsDrank++
-    val pintsLeft = (caskGallons-pintsInGallon*pintsDrank)/pintsInGallon
-
-    println("The bar has $pintsLeft pints left")
-}
-
 private fun placeOrder(menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
@@ -63,7 +45,6 @@ private fun placeOrder(menuData: String) {
     performPurchase(price.toDouble())
 
     val phrase = if (name == "Dragon's Breath") {
-        diplsayRemainingPints()
         "Madrigal exclaims: ${toDragonSpeak("Ah, delicious $name!")}"
     } else {
         "Madrigal says: Thanks for the $name"
