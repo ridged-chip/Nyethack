@@ -41,6 +41,16 @@ private fun toDragonSpeak(phrase: String) =
         }
     }
 
+private fun diplsayRemainingPints() {
+    val caskGallons = 5
+    val pintsInGallon = 0.125
+    var pintsDrank = 12
+    pintsDrank++
+    val pintsLeft = (caskGallons-pintsInGallon*pintsDrank)/pintsInGallon
+
+    println("The bar has $pintsLeft pints left")
+}
+
 private fun placeOrder(menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
@@ -53,6 +63,7 @@ private fun placeOrder(menuData: String) {
     performPurchase(price.toDouble())
 
     val phrase = if (name == "Dragon's Breath") {
+        diplsayRemainingPints()
         "Madrigal exclaims: ${toDragonSpeak("Ah, delicious $name!")}"
     } else {
         "Madrigal says: Thanks for the $name"
