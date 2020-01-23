@@ -5,6 +5,10 @@ fun main(args: Array<String>) {
 
     printPlayerStatus(player)
     player.castFireball(5)
+
+    var currentRoom = TownSquare()
+    println(currentRoom.description())
+    println(currentRoom.load())
 }
 
 private fun printPlayerStatus(player: Player) {
