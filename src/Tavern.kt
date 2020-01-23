@@ -3,14 +3,15 @@ import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
-var playerGold = 10
-var playerSilver = 10
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie") //Use just listOf(...) for read-only lists
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
 val uniquePatrons = mutableSetOf<String>()
 val menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n")
+
+// Could also be written as val patronGold = mapOf(Pair("Eli", 10.75), Pair("Mordoc", 8.00), Pair("Sophie", 5.50))
+val patronGold = mutableMapOf<String, Double>()
 
 
 fun main(args: Array<String>) {
@@ -32,7 +33,9 @@ fun main(args: Array<String>) {
         val name = "$first $last"
         uniquePatrons += name
     }
-    println(uniquePatrons)
+    uniquePatrons.forEach {
+        patronGold[it] = 6.0
+    }
 
     var orderCount = 0
     while (orderCount <= 9) {
@@ -40,26 +43,18 @@ fun main(args: Array<String>) {
             menuList.shuffled().first())
         orderCount++
     }
+
+    displayPatronBalances()
 }
 
-fun performPurchase(price: Double) {
-    displayBalance()
-    val totalPurse = playerGold + (playerSilver / 100.0)
-    println("Total purse: $totalPurse")
-    println("Purchasing item for $price")
-
-    val remainingBalance = totalPurse - price
-    println("Remaining balance: ${"%.2f".format(remainingBalance)}")
-
-    val remainingGold = remainingBalance.toInt()
-    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
-    displayBalance()
+private fun displayPatronBalances() {
+    patronGold.forEach { (patron, balance) ->
+        println("$patron, balance: ${"%.2f".format(balance)}")
+    }
 }
-
-private fun displayBalance(){
-    println("Player's purse balance: Gold: $playerGold , Silver: $playerSilver")
+fun performPurchase(price: Double, patronName: String) {
+    val totalPurse = patronGold.getValue(patronName)
+    patronGold[patronName] = totalPurse - price
 }
 
 private fun toDragonSpeak(phrase: String) =
@@ -82,8 +77,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     val (type, name, price) = menuData.split(',')
     val message = "$patronName buys a $name ($type) for $price"
     println(message)
-
-//    performPurchase(price.toDouble())
+    performPurchase(price.toDouble(), patronName)
 
     val phrase = if (name == "Dragon's Breath") {
         "$patronName exclaims: ${toDragonSpeak("Ah, delicious $name!")}"
