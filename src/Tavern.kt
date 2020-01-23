@@ -38,7 +38,7 @@ fun main(args: Array<String>) {
     }
 
     var orderCount = 0
-    while (orderCount <= 9) {
+    while (orderCount <= 9 && patronList.isNotEmpty()) {
         placeOrder(uniquePatrons.shuffled().first(),
             menuList.shuffled().first())
         orderCount++
@@ -53,8 +53,16 @@ private fun displayPatronBalances() {
     }
 }
 fun performPurchase(price: Double, patronName: String) {
-    val totalPurse = patronGold.getValue(patronName)
-    patronGold[patronName] = totalPurse - price
+    val walletGross = patronGold.getValue(patronName)
+    val walletNet = walletGross - price
+
+    if (walletNet <= 0) {
+        patronGold.remove(patronName)
+        uniquePatrons.remove(patronName)
+        println("$patronName is booted from the tavern for loitering")
+    } else {
+        patronGold[patronName] = walletNet
+    }
 }
 
 private fun toDragonSpeak(phrase: String) =
