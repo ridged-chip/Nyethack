@@ -1,7 +1,7 @@
 package com.bignerdranch.nyethack
 
 fun main(args: Array<String>) {
-    val player = Player()
+    val player = Player("Matt")
 
     printPlayerStatus(player)
     player.castFireball(5)
