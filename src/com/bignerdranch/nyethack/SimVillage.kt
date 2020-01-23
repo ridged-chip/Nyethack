@@ -1,4 +1,8 @@
-fun main(args: Array<String>) { runSimulation()}
+package com.bignerdranch.nyethack
+
+fun main(args: Array<String>) {
+    runSimulation()
+}
 
 fun runSimulation() {
     val greetingFunction = configureGreetingFunction()
