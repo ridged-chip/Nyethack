@@ -13,6 +13,7 @@ class Player(_name: String,
     }
 
     val hometown = selectHometown()
+    var currentPosition = Coordinate(0, 0)
 
     init {
         require(hp > 0, { "HP must be above zero!" })
