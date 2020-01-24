@@ -10,6 +10,7 @@ fun main(args: Array<String>) {
 object Game {
     private val player = Player("Matt")
     private var currentRoom: Room = TownSquare()
+    private var stillPlaying = true
 
     private var worldMap = listOf(
         listOf(currentRoom, Room("Tavern"), Room("Back Room")),
@@ -22,7 +23,7 @@ object Game {
     }
 
     fun play() {
-        while (true) {
+        while (stillPlaying) {
             println(currentRoom.description())
             println(currentRoom.load())
 
@@ -49,6 +50,7 @@ object Game {
 
         fun processCommand() = when (command.toLowerCase()) {
             "move" -> move(argument)
+            "quit" -> stillPlaying = false
             else -> commandNotFound()
         }
         private fun commandNotFound() = "I'm not quite sure what you're trying to do!"
