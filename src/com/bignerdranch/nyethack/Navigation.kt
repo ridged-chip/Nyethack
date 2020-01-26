@@ -9,6 +9,7 @@ enum class Direction(private val coordinate: Coordinate) {
     fun updateCoordinate(playerXY: Coordinate) =
         coordinate + playerXY
 }
+
 data class Coordinate(val x: Int, val y: Int) {
     val isInBounds = x>= 0 && y >= 0
 

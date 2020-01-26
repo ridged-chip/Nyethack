@@ -12,7 +12,7 @@ object Game {
     private var currentRoom: Room = TownSquare()
     private var stillPlaying = true
 
-    private var worldMap = listOf(
+    private val worldMap = listOf(
         listOf(currentRoom, Room("Tavern"), Room("Back Room")),
         listOf(Room("Long Corridor"), Room("Generic Room")))
 
@@ -51,6 +51,7 @@ object Game {
         fun processCommand() = when (command.toLowerCase()) {
             "move" -> move(argument)
             "quit" -> stillPlaying = false
+            "map" -> showMap()
             else -> commandNotFound()
         }
         private fun commandNotFound() = "I'm not quite sure what you're trying to do!"
@@ -70,6 +71,19 @@ object Game {
             "OK, you move $direction to the ${newRoom.name}.\n${newRoom.load()}"
         } catch (e: Exception) {
             "Invalid direction: $directionInput"
+        }
+    }
+
+    private fun showMap() {
+        worldMap.forEachIndexed { y, _ ->
+            worldMap[y].forEachIndexed { x, _ ->
+                if (worldMap[y][x] == currentRoom) {
+                    print("X ")
+                } else {
+                    print("O ")
+                }
+            }
+            print("\n")
         }
     }
 }
