@@ -16,9 +16,18 @@ object Game {
         listOf(Room("Long Corridor"), Room("Generic Room")))
 
     init {
-        println("Welcome, adventurer!")
+        println("Matt".frame(5))
         player.castFireball(5)
 
+    }
+
+    private fun String.frame(padding: Int, formatChar: String = "*"): String {
+        val greeting = "$this!"
+        val middle = formatChar.padEnd(padding)
+            .plus(greeting)
+            .plus(formatChar.padStart(padding))
+        val end = (0 until middle.length).joinToString("") { formatChar }
+        return "$end\n$middle\n$end"
     }
 
     fun play() {
