@@ -1,6 +1,9 @@
 package com.bignerdranch.nyethack
 
 import java.io.File
+import com.bignerdranch.nyethack.extensions.random
+
+
 
 class Player(_name: String,
              override var hp: Int = 100,
@@ -67,6 +70,5 @@ class Player(_name: String,
     private fun selectHometown() = File("data/towns.txt")
         .readText()
         .split("\n")
-        .shuffled()
-        .first()
+        .random()
 }

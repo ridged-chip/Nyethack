@@ -1,6 +1,9 @@
 package com.bignerdranch.nyethack
 
 import java.io.File
+import com.bignerdranch.nyethack.extensions.random
+
+
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -13,6 +16,7 @@ val menuList = File("data/tavern-menu-items.txt")
 
 // Could also be written as val com.bignerdranch.nyethack.getPatronGold = mapOf(Pair("Eli", 10.75), Pair("Mordoc", 8.00), Pair("Sophie", 5.50))
 val patronGold = mutableMapOf<String, Double>()
+
 
 
 fun main(args: Array<String>) {
@@ -29,8 +33,8 @@ fun main(args: Array<String>) {
     }
 
     (0..9).forEach() {
-        val first = patronList.shuffled().first()
-        val last = patronList.shuffled().first()
+        val first = patronList.random()
+        val last = patronList.random()
         val name = "$first $last"
         uniquePatrons += name
     }
@@ -41,8 +45,8 @@ fun main(args: Array<String>) {
     var orderCount = 0
     while (orderCount <= 9) {
         placeOrder(
-            uniquePatrons.shuffled().first(),
-            menuList.shuffled().first()
+            uniquePatrons.random(),
+            menuList.random()
         )
         orderCount++
     }
