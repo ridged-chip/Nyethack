@@ -3,8 +3,6 @@ package com.bignerdranch.nyethack
 import java.io.File
 import com.bignerdranch.nyethack.extensions.random
 
-
-
 const val TAVERN_NAME = "Taernyl's Folly"
 
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie") //Use just listOf(...) for read-only lists
@@ -13,12 +11,18 @@ val uniquePatrons = mutableSetOf<String>()
 val menuList = File("data/tavern-menu-items.txt")
     .readText()
     .split("\n")
-
-// Could also be written as val com.bignerdranch.nyethack.getPatronGold = mapOf(Pair("Eli", 10.75), Pair("Mordoc", 8.00), Pair("Sophie", 5.50))
 val patronGold = mutableMapOf<String, Double>()
 
-
-
+fun String.toDragonSpeak() = this.replace(Regex("[aeiou]")) {
+    when (it.value) {
+        "a" -> "4"
+        "e" -> "3"
+        "i" -> "1"
+        "o" -> "0"
+        "u" -> "|_|"
+        else -> it.value
+    }
+}
 fun main(args: Array<String>) {
     if (patronList.contains("Eli")) {
         println("The tavern master says: Eli's in the back playing cards. ")
@@ -63,19 +67,6 @@ fun performPurchase(price: Double, patronName: String) {
     val totalPurse = patronGold.getValue(patronName)
     patronGold[patronName] = totalPurse - price
 }
-
-private fun toDragonSpeak(phrase: String) =
-    phrase.replace(Regex("[aeiou]")) {
-        when (it.value) {
-            "a" -> "4"
-            "e" -> "3"
-            "i" -> "1"
-            "o" -> "0"
-            "u" -> "|_|"
-            else -> it.value
-        }
-    }
-
 private fun placeOrder(patronName: String, menuData: String) {
     val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
     val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
@@ -87,7 +78,7 @@ private fun placeOrder(patronName: String, menuData: String) {
     performPurchase(price.toDouble(), patronName)
 
     val phrase = if (name == "Dragon's Breath") {
-        "$patronName exclaims: ${toDragonSpeak("Ah, delicious $name!")}"
+        "$patronName exclaims: ${"Ah, delicious $name!".toDragonSpeak()}"
     } else {
         "$patronName says: Thanks for the $name"
     }

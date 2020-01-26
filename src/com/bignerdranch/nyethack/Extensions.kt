@@ -9,7 +9,7 @@ fun <T> T.easyPrint() : T {
     return this
 }
 
-infix fun String?.printWtihDefault(default: String) = print(this ?: default)
+infix fun String?.printWithDefault(default: String) = print(this ?: default)
 
 fun main(args: Array<String>) {
     "Matt has left the building".easyPrint().addEnthusiasm().easyPrint()
@@ -17,5 +17,5 @@ fun main(args: Array<String>) {
     "How many vowels?".numVowels.easyPrint()
 
     val nullableString: String? = null
-    nullableString printWtihDefault "Default string"
+    nullableString printWithDefault "Default string"
 }
