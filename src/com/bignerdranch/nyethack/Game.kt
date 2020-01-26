@@ -48,6 +48,7 @@ object Game {
         val argument = input.split(" ").getOrElse(1, { "" })
 
         fun processCommand() = when (command.toLowerCase()) {
+            "fight" -> fight()
             "move" -> move(argument)
             else -> commandNotFound()
         }
@@ -68,6 +69,28 @@ object Game {
             "OK, you move $direction to the ${newRoom.name}.\n${newRoom.load()}"
         } catch (e: Exception) {
             "Invalid direction: $directionInput"
+        }
+    }
+
+    private fun fight() = currentRoom.monster?.let {
+        while (player.hp > 0 && it.hp > 0) {
+            slay(it)
+            Thread.sleep(1000)
+        }
+
+        "Combat complete."
+    } ?: "There's nothing left to fight."
+
+    private fun slay(monster: Monster) {
+        println("${monster.name} did ${monster.attack(player)} damage!")
+        println("${player.name} did ${player.attack(monster)} damage!")
+
+        if (player.hp <= 0) {
+            println(">>>> You have been defeated. <<<<")
+        }
+
+        if (monster.hp <= 0) {
+            println(">>>> ${monster.name} has been defeated. <<<<")
         }
     }
 }

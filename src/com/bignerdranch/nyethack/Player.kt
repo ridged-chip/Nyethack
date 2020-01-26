@@ -3,9 +3,22 @@ package com.bignerdranch.nyethack
 import java.io.File
 
 class Player(_name: String,
-             var hp: Int = 100,
+             override var hp: Int = 100,
              var isBlessed: Boolean,
-             private val isImmortal: Boolean) {
+             private val isImmortal: Boolean) : Fightable {
+
+    override val diceNum = 3
+    override val diceSides = 6
+    override fun attack(opponent: Fightable): Int {
+        val dmgDealt = if (isBlessed) {
+            dmgRoll*2
+        } else {
+            dmgRoll
+        }
+        opponent.hp -= dmgDealt
+        return dmgDealt
+    }
+
     var name = "matt"
     get() = "${field.capitalize()} of $hometown"
     private set(value) {
