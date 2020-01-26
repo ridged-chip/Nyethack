@@ -18,17 +18,17 @@ object Game {
 
     init {
         println("Welcome, adventurer!")
-        player.castFireball(5)
+//        player.castFireball(5)
 
     }
 
     fun play() {
         while (stillPlaying) {
-            println(currentRoom.description())
-            println(currentRoom.load())
+//            println(currentRoom.description())
+//            println(currentRoom.load())
 
             //Player status
-            printPlayerStatus(player)
+//            printPlayerStatus(player)
 
             print("> Enter command: ")
             println(GameInput(readLine()).processCommand())
@@ -52,6 +52,11 @@ object Game {
             "move" -> move(argument)
             "quit" -> stillPlaying = false
             "map" -> showMap()
+            "ring" -> if (currentRoom is TownSquare) {
+                (currentRoom as TownSquare).bellSound
+            } else {
+                commandNotFound()
+            }
             else -> commandNotFound()
         }
         private fun commandNotFound() = "I'm not quite sure what you're trying to do!"
