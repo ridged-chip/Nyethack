@@ -1,0 +1,85 @@
+# NyetHack
+A text-based fantasy game. Based on Kotlin Programming: The Big Nerd Ranch Guide. The main branch is the base app, challenge exercises are implemented in the branches.
+
+## What I learned
+- Conditionals
+- - if/else
+- - when
+- Ranges
+- String templates
+- Functions
+- - Anatomy
+- - Lambda functions
+- Null safety
+- - Safe call operator
+- - !! operator
+- - Checking if value is null via conditional
+- Exceptions
+- - Throwing
+- - Custom
+- - Handling
+- Numeric Types
+- Standard Functions
+- - apply
+- - let
+- - run
+- - with
+- - also
+- - takeIf
+- - takeUnless
+- Lists
+- Sets
+- Maps
+- Classes
+- - Instances
+- - Functions
+- - Visibility / Encapsulation
+- - Properties
+- - Packages
+- Initialization
+- - Constructors
+- - - Types
+- - - - Primary
+- - - - Secondary
+- - - Arguments
+- - - - Default
+- - - - Named
+- - Initializer Blocks
+- - Initialization Order
+- - - Late
+- - - Lazy
+- Inheritance
+- - Subclasses
+- - Type Inheritance
+- - Type Hierarchy
+- - - Type Casting
+- - - Smart Casting
+- Objects
+- - Nested Classes
+- - Data Classes
+- - - toString
+- - - equals
+- - - copy
+- - Enumerated Classes 
+- - Operator Overloading
+- Interfaces
+- Abstract Classes
+- Generics
+- - Functions
+- - Constraints
+- - vargarg / get
+- - in / out
+- - reified
+- Extensions
+- Functional Programming 
+- - Transforms
+- - Filters
+- - Combines
+- - Sequences
+- Java Interoptability
+- - Nullity
+- - Type Mapping
+- - Getters / Setters
+- - Classes
+- - Exceptions
+- - Function Types
